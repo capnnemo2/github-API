@@ -8,10 +8,24 @@ function watchForm() {
     });
 }
 
+function getRepos(handle) {
+    fetch(`https://api.github.com/users/${handle}/repos`)
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(responseJson => displayResults(responseJson))
+    .catch(err => {
+        $('#js-err-msg').text(`The man behind the curtain says: ${err.message}`);
+    });
+}
 
 
 
-$(`https://api.github.com/users/${user-handle}/repos`)
+
+$(`https://api.github.com/users/${handle}/repos`)
 
 
 
