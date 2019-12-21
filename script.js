@@ -9,7 +9,9 @@ function watchForm() {
 }
 
 function getRepos(handle) {
-    fetch(`https://api.github.com/users/${handle}/repos`)
+    const url = `https://api.github.com/users/${handle}/repos`;
+    console.log(url);
+    fetch(url)
     .then(response => {
         if (response.ok) {
             return response.json();
@@ -22,10 +24,15 @@ function getRepos(handle) {
     });
 }
 
+function displayResults(responseJson) {
+    console.log(responseJson);
+    $('.results-list').empty();
+    for (let i = 0; i < responseJson.articles.length; i++) {
+        $('.results-list').append(`<li><h3>${responseJson.articles[i].title}</h3><h4>${responseJson.articles[i].url}</h4></li>`)
+    };
+    $('#results').removeClass('hidden');
 
-
-
-$(`https://api.github.com/users/${handle}/repos`)
+}
 
 
 
