@@ -26,11 +26,24 @@ function getRepos(handle) {
 
 function displayResults(responseJson) {
     console.log(responseJson);
-    $('.results-list').empty();
-    for (let i = 0; i < responseJson.articles.length; i++) {
-        $('.results-list').append(`<li><h3>${responseJson.articles[i].title}</h3><h4>${responseJson.articles[i].url}</h4></li>`)
-    };
-    $('#results').removeClass('hidden');
+    $('#results-list').empty();
+    let results = "";
+    responseJson.forEach(userRepo => {
+        results += `<li>
+        <h3>${userRepo.name}</h3>
+        <h4>${userRepo.html_url}</h4>
+        <p>${userRepo.description}</p>
+        </li>`;
+    });
+    $('#results-list').html(results);
+
+
+    // for (let i = 0; i < responseJson.length; i++) {
+    //     $('.results-list').append(`<li><h3>${responseJson[i].name}</h3><h4>${responseJson[i].html_url}</h4><p>${responseJson[i].description}</p></li>`)
+    // };
+
+
+    $('.results').removeClass('hidden');
 
 }
 
